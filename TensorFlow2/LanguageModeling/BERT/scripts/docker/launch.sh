@@ -15,13 +15,14 @@
 # ==============================================================================
 
 CMD=${@:-/bin/bash}
-NV_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-"all"}
+NV_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-"0"}
 
-docker run --gpus $NV_VISIBLE_DEVICES --rm -it \
+podman run --rm -it \
     --net=host \
-    --shm-size=1g \
+    --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
+    --root=/data/meyceoz/ --security-opt=no-new-privileges --cap-drop=ALL --security-opt label=type:nvidia_container_t \
     -e NVIDIA_VISIBLE_DEVICES=$NV_VISIBLE_DEVICES \
-    -v $PWD:/workspace/bert_tf2 -v $PWD/results:/results \
+    -v $PWD:/workspace/bert_tf2:z -v $PWD/results:/results:z \
     bert_tf2 $CMD

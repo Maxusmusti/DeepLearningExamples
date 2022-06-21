@@ -18,7 +18,7 @@
 to_download=${1:-"all"}
 pretrained_to_download=${2:-"wiki_only"} # By default, we don't download BooksCorpus dataset due to recent issues with the host server
 
-docker run --runtime=nvidia -v $PWD:/workspace/bert_tf2 \
-    --rm --shm-size=1g --ulimit memlock=-1 \
+podman run --root=/data/meyceoz --security-opt=no-new-privileges --cap-drop=ALL --security-opt label=type:nvidia_container_t -v $PWD:/workspace/bert_tf2:Z \
+    --rm --ulimit memlock=-1 \
     --ulimit stack=67108864 --ipc=host -t -i \
     bert_tf2 bash -c "bash data/create_datasets_from_start.sh ${to_download} ${pretrained_to_download}"

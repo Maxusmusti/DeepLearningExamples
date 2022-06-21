@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-docker build . --rm -t bert_tf2
+podman build --root=/data/meyceoz -t bert_tf2 .

@@ -22,7 +22,7 @@ podman run --rm -it \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    --root=/data/meyceoz/ --security-opt=no-new-privileges --cap-drop=ALL --security-opt label=type:nvidia_container_t \
+    --security-opt=no-new-privileges --cap-drop=ALL --security-opt label=type:nvidia_container_t \
     -e NVIDIA_VISIBLE_DEVICES=$NV_VISIBLE_DEVICES \
     -v $PWD:/workspace/bert_tf2:z -v $PWD/results:/results:z \
     bert_tf2 $CMD

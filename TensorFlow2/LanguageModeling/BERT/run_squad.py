@@ -616,11 +616,11 @@ def main(_):
   for gpu in gpus:
     tf.config.experimental.set_memory_growth(gpu, True)
 
-  if gpus:
-    try:
-      tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=7512)])
-    except RuntimeError as e:
-      print(e)
+#  if gpus:
+#    try:
+#      tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=7512)])
+#    except RuntimeError as e:
+#      print(e)
 
   strategy = distribution_utils.get_distribution_strategy(
       distribution_strategy=FLAGS.distribution_strategy,
